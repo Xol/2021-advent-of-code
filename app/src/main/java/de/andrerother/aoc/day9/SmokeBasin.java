@@ -60,29 +60,29 @@ public class SmokeBasin {
 
         for(int i = 0; i < matrix.length; i++) {
             for(int j = 0; j < matrix[i].length; j++) {
-                boolean topIsSmaller = false;
-                boolean rightIsSmaller = false;
-                boolean bottomIsSmaller = false;
-                boolean leftIsSmaller = false;
-                //top
+                boolean topIsSmaller;
+                boolean rightIsSmaller;
+                boolean bottomIsSmaller;
+                boolean leftIsSmaller;
+                //check top
                 if(j-1>=0){
                     topIsSmaller = matrix[i][j] < matrix[i][j-1];
                 } else {
                     topIsSmaller = true;
                 }
-                //right
+                //check right
                 if(i+1 < matrix.length) {
                     rightIsSmaller = matrix[i][j] < matrix[i+1][j];
                 } else {
                     rightIsSmaller = true;
                 }
-                //bottom
+                //check bottom
                 if(j+1 < matrix[i].length) {
                     bottomIsSmaller = matrix[i][j] < matrix[i][j+1];
                 } else {
                     bottomIsSmaller = true;
                 }
-                //left
+                //check left
                 if(i-1 >= 0){
                     leftIsSmaller = matrix[i][j] < matrix[i-1][j];
                 } else {

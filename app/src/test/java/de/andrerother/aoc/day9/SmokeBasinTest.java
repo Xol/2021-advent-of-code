@@ -2,7 +2,6 @@ package de.andrerother.aoc.day9;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -12,7 +11,7 @@ class SmokeBasinTest {
     final SmokeBasin underTest = new SmokeBasin();
 
     @Test
-    void convert_heighmap_to_list_matrix_and_pass() {
+    void convert_heighmap_matrix() {
         int[] expected = {2,1,9,9,9,4,3,2,1,0};
         int[] given = underTest.convertStringToVector("2199943210");
         assertArrayEquals(expected, given);
@@ -33,31 +32,20 @@ class SmokeBasinTest {
     }
 
     private List<Integer> createResultForDemoData() {
-        List<Integer> result = new ArrayList<>();
-        result.add(2);
-        result.add(1);
-        result.add(6);
-        result.add(6);
-        return result;
+        return List.of(2,1,6,6);
     }
 
     private List<String> createHeighmapDemoData() {
-        List<String> demoData = new ArrayList<>();
-        demoData.add("2199943210");
-        demoData.add("3987894921");
-        demoData.add("9856789892");
-        demoData.add("8767896789");
-        demoData.add("9899965678");
-        return demoData;
+        return List.of("2199943210","3987894921","9856789892","8767896789","9899965678");
     }
 
     private int[][] createMatrixForDemoData() {
         return new int[][]{
-                {2,1,9,9,9,4,3,2,1,0},
-                {3,9,8,7,8,9,4,9,2,1},
-                {9,8,5,6,7,8,9,8,9,2},
-                {8,7,6,7,8,9,6,7,8,9},
-                {9,8,9,9,9,6,5,6,7,8}
+            {2,1,9,9,9,4,3,2,1,0},
+            {3,9,8,7,8,9,4,9,2,1},
+            {9,8,5,6,7,8,9,8,9,2},
+            {8,7,6,7,8,9,6,7,8,9},
+            {9,8,9,9,9,6,5,6,7,8}
         };
     }
 }
