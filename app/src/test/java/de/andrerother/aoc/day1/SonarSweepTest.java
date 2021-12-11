@@ -2,7 +2,6 @@ package de.andrerother.aoc.day1;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,17 +22,6 @@ class SonarSweepTest {
     }
 
     private List<Integer> createMeasuresWithSevenIncreases() {
-        List<Integer> testMeasures = new ArrayList<>();
-        testMeasures.add(199);
-        testMeasures.add(200);
-        testMeasures.add(208);
-        testMeasures.add(210);
-        testMeasures.add(200);
-        testMeasures.add(207);
-        testMeasures.add(240);
-        testMeasures.add(269);
-        testMeasures.add(260);
-        testMeasures.add(263);
-        return testMeasures;
+        return List.of(199,200,208,210,200,207,240,269,260,263);
     }
 }
