@@ -14,7 +14,7 @@ public class SmokeBasin {
     public static void main(final String[] args) {
         SmokeBasin instance = new SmokeBasin();
         int[][] heighmap = instance.readHeighmapFile();
-        List<Integer> result = instance.searchForLowPoints(heighmap);
+        List<LowPoint> result = instance.searchForLowPoints(heighmap);
         System.out.println("Part One Answer: " + instance.calculateSolution(result));
     }
     public int[][] readHeighmapFile() {
@@ -55,8 +55,8 @@ public class SmokeBasin {
         return Arrays.stream(line.split("")).mapToInt(Integer::parseInt).toArray();
     }
 
-    public List<Integer> searchForLowPoints(final int[][] matrix) {
-        List<Integer> result = new ArrayList<>();
+    public List<LowPoint> searchForLowPoints(final int[][] matrix) {
+        List<LowPoint> result = new ArrayList<>();
 
         for(int i = 0; i < matrix.length; i++) {
             for(int j = 0; j < matrix[i].length; j++) {
@@ -82,14 +82,14 @@ public class SmokeBasin {
                 }
 
                 if(topIsSmaller && rightIsSmaller && bottomIsSmaller && leftIsSmaller) {
-                    result.add(matrix[i][j]+1);
+                    result.add(new LowPoint(matrix[i][j]+1,i,j));
                 }
             }
         }
         return result;
     }
 
-    public int calculateSolution(final List<Integer> lowPointsWithRisk) {
-        return lowPointsWithRisk.stream().reduce(0, Integer::sum);
+    public int calculateSolution(final List<LowPoint> lowPoints) {
+        return lowPoints.stream().map(LowPoint::getValueWithRisk).reduce(0, Integer::sum);
     }
 }

@@ -26,13 +26,18 @@ class SmokeBasinTest {
 
     @Test
     void check_result_for_demo_data() {
-        List<Integer> given = underTest.searchForLowPoints(createMatrixForDemoData());
-        List<Integer> expexted = createResultForDemoData();
+        List<LowPoint> given = underTest.searchForLowPoints(createMatrixForDemoData());
+        List<LowPoint> expexted = createResultForDemoData();
         assertEquals(expexted, given);
     }
 
-    private List<Integer> createResultForDemoData() {
-        return List.of(2,1,6,6);
+    private List<LowPoint> createResultForDemoData() {
+        return List.of(
+            new LowPoint(2,0,1),
+            new LowPoint(1,0,9),
+            new LowPoint(6,2,2),
+            new LowPoint(6,4,6)
+        );
     }
 
     private List<String> createHeighmapDemoData() {
