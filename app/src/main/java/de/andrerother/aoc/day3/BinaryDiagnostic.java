@@ -11,8 +11,8 @@ import java.util.List;
 public class BinaryDiagnostic {
     public static void main(final String[] args) {
         BinaryDiagnostic instance = new BinaryDiagnostic();
-        int[] gammaBinary = instance.parseDiagnosticToBinary(instance.readDiagnostics());
-        int[] epsilonBinary = instance.invertDecimalArray(gammaBinary);
+        String gammaBinary = instance.parseDiagnosticToBinary(instance.readDiagnostics());
+        String epsilonBinary = instance.invertDecimalArray(gammaBinary);
         int gamma = instance.binaryToDecimal(gammaBinary);
         int epsilon = instance.binaryToDecimal(epsilonBinary);
         int result = instance.calculatePowerConsumption(gamma, epsilon);
@@ -42,13 +42,13 @@ public class BinaryDiagnostic {
         return diagnostics;
     }
 
-    public int[] parseDiagnosticToBinary(final List<String> diagnostics) {
+    public String parseDiagnosticToBinary(final List<String> diagnostics) {
         if(diagnostics.isEmpty()) {
             throw new IllegalStateException();
         }
 
         int columnSize = getSizeOfColumns(diagnostics.get(0));
-        int[] result = new int[columnSize];
+        StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < columnSize; i++) {
             int gamma = 0;
@@ -58,26 +58,21 @@ public class BinaryDiagnostic {
                 gamma += diagnostic.charAt(i) == '1' ? 1 : 0;
                 epsilon += diagnostic.charAt(i) == '0' ? 1 : 0;
             }
-            result[i] = gamma > epsilon ? 1 : 0;
+            result.append(gamma > epsilon ? "1" : "0");
         }
-        return result;
+        return result.toString();
     }
 
-    public int binaryToDecimal(final int[] binaryDiagnostic) {
-        double decimal = 0;
-        for (int i = 0; i <= binaryDiagnostic.length-1; i++) {
-            double result = binaryDiagnostic[i] * Math.pow(2, binaryDiagnostic.length-(i+1));
-            decimal += result;
-        }
-        return (int) decimal;
+    public int binaryToDecimal(final String binaryDiagnostic) {
+        return Integer.parseInt(binaryDiagnostic, 2);
     }
 
-    public int[] invertDecimalArray(final int[] binaryDiagnostic) {
-        int[] invertedBinaryDiagnostic = new int[binaryDiagnostic.length];
-        for (int i = 0; i < binaryDiagnostic.length; i++) {
-            invertedBinaryDiagnostic[i] = binaryDiagnostic[i] == 1 ? 0 : 1;
+    public String invertDecimalArray(final String binaryDiagnostic) {
+        StringBuilder invertedBinary = new StringBuilder();
+        for (int i = 0; i < binaryDiagnostic.length(); i++) {
+            invertedBinary.append(binaryDiagnostic.charAt(i) == '1' ? "0" : "1");
         }
-        return invertedBinaryDiagnostic;
+        return invertedBinary.toString();
     }
 
     public int calculatePowerConsumption(final int gamma, final int epsilon) {
